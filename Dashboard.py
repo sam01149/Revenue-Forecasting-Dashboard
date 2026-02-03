@@ -57,13 +57,15 @@ with st.sidebar:
     seasonal_periods = st.number_input("Periode Musiman", min_value=2, value=8)
     
     st.markdown("---")
-    st.caption("Dikembangkan oleh: [Nama Kamu]")
+    st.caption("Dikembangkan oleh: Samuel Armando Napitu")
 
 # --- 4. MAIN INTERFACE ---
-st.title("📈 European Sales Revenue Forecasting")
+st.title("European Sales Revenue Forecasting")
 st.markdown("""
 Dashboard ini dirancang untuk memprediksi pendapatan penjualan di masa depan menggunakan metode 
 **Holt-Winters Exponential Smoothing**. Metode ini dipilih karena kemampuannya menangkap **Tren** dan **Musiman** pada data.
+        LINK : https://www.kaggle.com/datasets/mustafabayar/europe-sales-records
+            
 """)
 
 # Load Data
@@ -105,7 +107,7 @@ if data is not None:
         st.subheader("Tabel Hasil Prediksi")
         
         eval_df = pd.DataFrame({
-            'Tanggal': test.index,
+            'Bulan': test.index.strftime('%B %Y'),
             'Aktual': test.values,
             'Prediksi': forecast.values,
             'Selisih': test.values - forecast.values
