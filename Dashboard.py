@@ -63,10 +63,9 @@ with st.sidebar:
 st.title("European Sales Revenue Forecasting")
 st.markdown("""
 Dashboard ini dirancang untuk memprediksi pendapatan penjualan di masa depan menggunakan metode 
-**Holt-Winters Exponential Smoothing**. Metode ini dipilih karena kemampuannya menangkap **Tren** dan **Musiman** pada data.
-        LINK : https://www.kaggle.com/datasets/mustafabayar/europe-sales-records
-            
+**Holt-Winters Exponential Smoothing**. Metode ini dipilih karena kemampuannya menangkap **Tren** dan **Musiman** pada data.            
 """)
+st.markdown("""Link Kaggle: https://www.kaggle.com/datasets/mustafabayar/europe-sales-records""")
 
 # Load Data
 data = load_data()
@@ -113,7 +112,11 @@ if data is not None:
             'Selisih': test.values - forecast.values
         })
         
-        st.dataframe(eval_df.style.format("{:,.2f}"), use_container_width=True)
+        st.dataframe(eval_df.style.format({
+            'Aktual': "{:,.2f}",
+            'Prediksi': "{:,.2f}",
+            'Selisih': "{:,.2f}"
+        }), use_container_width=True)
         
         # Download Button
         csv = eval_df.to_csv().encode('utf-8')
